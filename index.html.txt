@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MD MARUFUL HOQUE | Business Student & Technology Enthusiast</title>
+  
+  <!-- SEO & OpenGraph Meta Tags -->
+  <meta name="description" content="Official Portfolio of MD MARUFUL HOQUE - Business Student at Daffodil International University, Technology Enthusiast, AI Learner & Future Entrepreneur." />
+  <meta name="keywords" content="MD MARUFUL HOQUE, Business Student, Daffodil International University, Technology Enthusiast, Entrepreneur, Python, Flutter, Management, Dhaka, Bangladesh" />
+  <meta name="author" content="MD MARUFUL HOQUE" />
+  <meta property="og:title" content="MD MARUFUL HOQUE | Business + Tech Hybrid" />
+  <meta property="og:description" content="Combining Business Strategy, Technology & Entrepreneurial Drive." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://marufulhoque.dev.bd" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts: Geist, Inter, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bgDark: '#050505',
+            bgSecondary: '#0B0B0B',
+            cardDark: '#111111',
+            borderDark: 'rgba(255,255,255,0.08)',
+            accent: '#0A84FF',
+            accentHover: '#4DA3FF',
+            success: '#00D084',
+            secText: '#B3B3B3',
+          },
+          fontFamily: {
+            geist: ['Geist', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+            space: ['Space Grotesk', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 20s linear infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React & Libraries via CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.dev.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom Scrollbar & Utility Styles */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050505;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #222;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0A84FF;
+    }
+    body {
+      background-color: #050505;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      selection-background-color: #0A84FF;
+      selection-color: #FFFFFF;
+    }
+    .glass-nav {
+      background: rgba(11, 11, 11, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card {
+      background: rgba(17, 17, 17, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card:hover {
+      border-color: rgba(10, 132, 255, 0.3);
+    }
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .noise-bg {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #FFFFFF 0%, #B3B3B3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-accent-gradient {
+      background: linear-gradient(135deg, #0A84FF 0%, #4DA3FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Hide custom cursor on mobile */
+    @media (max-width: 768px) {
+      .custom-cursor { display: none !important; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-accent selection:text-white">
+
+  <!-- React Root Container -->
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useMemo } = React;
+    const { motion, AnimatePresence, useScroll, useSpring, useTransform } = window.Motion || FramerMotion;
+
+    // --- Lucide Icon Helper ---
+    const Icon = ({ name, className = "w-5 h-5", size, color }) => {
+      const ref = useRef(null);
+      useEffect(() => {
+        if (ref.current) {
+          ref.current.innerHTML = `<i data-lucide="${name}"></i>`;
+          if (window.lucide) {
+            window.lucide.createIcons({
+              attrs: {
+                class: className
+              },
+              nameAttr: 'data-lucide'
+            });
+          }
+        }
+      }, [name, className]);
+      return <span ref={ref} class="inline-flex items-center justify-center"></span>;
+    };
+
+    // --- DATA CONSTANTS ---
+    const PROFILE_DATA = {
+      name: "MD MARUFUL HOQUE",
+      role: "Business Student • Tech Enthusiast • Future Entrepreneur",
+      university: "Daffodil International University",
+      department: "Management (BBA)",
+      location: "Savar, Dhaka, Bangladesh",
+      nationality: "Bangladeshi",
+      email: "mhmuhib143@gmail.com",
+      phone: "+880 1405 744958",
+      github: "https://github.com/MUHIB-143",
+      domain: "https://marufulhoque.dev.bd",
+      bio: "Undergraduate student bridging the gap between business management strategy and modern tech innovations. Passionate about software architecture, business operations, AI solutions, and building technology-driven scalable ventures."
+    };
+
+    const HERO_TYPING = [
+      "Business Management",
+      "Technology & Innovation",
+      "AI Tools & Automation",
+      "Python & Django Backend",
+      "Flutter Mobile Development",
+      "Entrepreneurial Strategy"
+    ];
+
+    const BUSINESS_SKILLS = [
+      { name: "Strategic Management", desc: "Formulating long-term operational and growth strategies.", icon: "briefcase", level: 90 },
+      { name: "Leadership & Team Building", desc: "Leading cross-functional teams and organizing initiatives.", icon: "users", level: 88 },
+      { name: "Communication & Pitching", desc: "Articulating technical & business concepts to stakeholders.", icon: "message-square", level: 92 },
+      { name: "Problem Solving", desc: "Deconstructing complex operational challenges into actionable solutions.", icon: "brain", level: 95 },
+      { name: "Presentation & Public Speaking", desc: "Delivering business proposals and strategic decks.", icon: "presentation", level: 85 }
+    ];
+
+    const TECHNICAL_SKILLS = [
+      { name: "Python", category: "Backend", desc: "Scripting, data handling, and backend development.", icon: "code" },
+      { name: "Flutter", category: "Mobile", desc: "Cross-platform mobile UI engineering.", icon: "smartphone" },
+      { name: "Django", category: "Framework", desc: "Robust Python web applications.", icon: "layers" },
+      { name: "Git & GitHub", category: "DevOps", desc: "Version control & team collaboration workflows.", icon: "git-branch" },
+      { name: "Linux System Admin", category: "OS", desc: "Server environments & CLI automation.", icon: "terminal" },
+      { name: "AI Tools & Prompt Engineering", category: "AI", desc: "Utilizing LLMs to accelerate development & business workflow.", icon: "cpu" },
+      { name: "Web Fundamentals (HTML/CSS/JS)", category: "Frontend", desc: "Building responsive modern interfaces.", icon: "globe" },
+      { name: "MS Office Suite / Excel Analysis", category: "Productivity", desc: "Business modeling and financial spreadsheets.", icon: "file-text" }
+    ];
+
+    const EDUCATION = [
+      {
+        degree: "Bachelor of Business Administration (BBA)",
+        field: "Department of Management",
+        institution: "Daffodil International University",
+        location: "Savar, Dhaka",
+        period: "Ongoing",
+        status: "Current",
+        details: "Focusing on Business Management, Entrepreneurship, Strategic Planning, Human Resource Management, and Technology Integration."
+      },
+      {
+        degree: "Higher Secondary Certificate (HSC)",
+        field: "Business Studies / Science",
+        institution: "Reputed Institution, Dhaka",
+        location: "Dhaka, Bangladesh",
+        period: "Completed",
+        status: "Passed",
+        details: "Built strong foundations in accounting, statistics, management, and basic computer science."
+      },
+      {
+        degree: "Secondary School Certificate (SSC)",
+        field: "General Education",
+        institution: "High School, Bangladesh",
+        location: "Dhaka, Bangladesh",
+        period: "Completed",
+        status: "Passed",
+        details: "Achieved excellence with focus on Mathematics, Science, and Information Technology."
+      },
+      {
+        degree: "Master's Degree Goal (Future)",
+        field: "Technology Management / MBA",
+        institution: "Global Top University",
+        location: "International Target",
+        period: "Upcoming",
+        status: "Future Vision",
+        details: "Planning specialized higher studies bridging global business management with artificial intelligence and digital venture creation."
+      }
+    ];
+
+    const PROJECTS = [
+      {
+        title: "Agri-Business & Tech Platform Concept",
+        category: "Business + Tech Strategy",
+        desc: "A digital ecosystem proposal connecting local agricultural supply chains with modern distribution networks using tech tracking.",
+        tags: ["Business Model", "Python", "Market Analysis"],
+        github: "https://github.com/MUHIB-143",
+        demo: "#",
+        featured: true
+      },
+      {
+        title: "Django Enterprise Resource Management",
+        category: "Full Stack / Python",
+        desc: "A web platform designed to streamline inventory tracking, staff scheduling, and sales analytics for medium enterprises.",
+        tags: ["Django", "Python", "TailwindCSS", "SQLite"],
+        github: "https://github.com/MUHIB-143",
+        demo: "#",
+        featured: true
+      },
+      {
+        title: "Flutter Productivity Companion App",
+        category: "Mobile Application",
+        desc: "Cross-platform mobile application combining task management, target setting, and AI-driven daily productivity insights.",
+        tags: ["Flutter", "Dart", "Firebase", "UI/UX"],
+        github: "https://github.com/MUHIB-143",
+        demo: "#",
+        featured: false
+      },
+      {
+        title: "AI-Powered Market Sentiment Analyzer",
+        category: "AI & Automation",
+        desc: "Python CLI script utilizing generative AI APIs to summarize news sentiment for small business owners in real time.",
+        tags: ["Python", "Gemini API", "Data Processing"],
+        github: "https://github.com/MUHIB-143",
+        demo: "#",
+        featured: false
+      }
+    ];
+
+    const CERTIFICATES = [
+      {
+        title: "Leadership & Business Management Fundamentals",
+        issuer: "DIU & Professional Forums",
+        date: "2024",
+        desc: "Comprehensive training in organizational leadership, team coordination, and strategic business execution.",
+        icon: "award"
+      },
+      {
+        title: "Python Application Engineering",
+        issuer: "Tech Learning Platform",
+        date: "2023",
+        desc: "Certification covering core Python concepts, object-oriented programming, data handling, and backend logic.",
+        icon: "shield-check"
+      },
+      {
+        title: "Flutter Mobile App Development",
+        issuer: "Developer Training Academy",
+        date: "2024",
+        desc: "Hands-on certification building cross-platform native iOS & Android applications with Dart.",
+        icon: "smartphone"
+      },
+      {
+        title: "Artificial Intelligence Tools for Enterprise Productivity",
+        issuer: "Global Online Workshop",
+        date: "2024",
+        desc: "Mastery in using modern AI tools, prompt engineering, and workflow automation for business speed.",
+        icon: "cpu"
+      }
+    ];
+
+    // --- THREE.JS BACKGROUND COMPONENT ---
+    const ThreeBackground = () => {
+      const mountRef = useRef(null);
+
+      useEffect(() => {
+        let scene, camera, renderer, particles, animationFrameId;
+        const container = mountRef.current;
+        if (!container) return;
+
+        // Initialize Scene
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
+
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Particle System
+        const particleCount = 120;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+          positions[i] = (Math.random() - 0.5) * 60;
+          positions[i + 1] = (Math.random() - 0.5) * 60;
+          positions[i + 2] = (Math.random() - 0.5) * 60;
+
+          // Subtle cyan/accent color mix
+          colors[i] = 0.04;     // R
+          colors[i + 1] = 0.51; // G
+          colors[i + 2] = 1.0;  // B
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+          size: 0.8,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.4
+        });
+
+        particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // Mouse Parallax Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+
+        const handleMouseMove = (event) => {
+          mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+          mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+
+        const handleResize = () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Animation Loop
+        const animate = () => {
+          animationFrameId = requestAnimationFrame(animate);
+
+          particles.rotation.x += 0.0005;
+          particles.rotation.y += 0.0008;
+
+          // Smooth camera swing following mouse
+          camera.position.x += (mouseX * 3 - camera.position.x) * 0.02;
+          camera.position.y += (-mouseY * 3 - camera.position.y) * 0.02;
+          camera.lookAt(scene.position);
+
+          renderer.render(scene, camera);
+        };
+
+        animate();
+
+        return () => {
+          window.removeEventListener('mousemove', handleMouseMove);
+          window.removeEventListener('resize', handleResize);
+          cancelAnimationFrame(animationFrameId);
+          if (container && renderer.domElement) {
+            container.removeChild(renderer.domElement);
+          }
+        };
+      }, []);
+
+      return <div ref={mountRef} className="fixed inset-0 pointer-events-none z-0" />;
+    };
+
+    // --- CUSTOM CURSOR ---
+    const CustomCursor = () => {
+      const cursorRef = useRef(null);
+      const followerRef = useRef(null);
+
+      useEffect(() => {
+        const moveCursor = (e) => {
+          const { clientX, clientY } = e;
+          if (cursorRef.current) {
+            gsap.to(cursorRef.current, { x: clientX, y: clientY, duration: 0.1 });
+          }
+          if (followerRef.current) {
+            gsap.to(followerRef.current, { x: clientX - 12, y: clientY - 12, duration: 0.3 });
+          }
+        };
+
+        window.addEventListener('mousemove', moveCursor);
+        return () => window.removeEventListener('mousemove', moveCursor);
+      }, []);
+
+      return (
+        <React.Fragment>
+          <div ref={cursorRef} className="custom-cursor fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2" />
+          <div ref={followerRef} className="custom-cursor fixed top-0 left-0 w-8 h-8 border border-accent/40 rounded-full pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-75" />
+        </React.Fragment>
+      );
+    };
+
+    // --- PRELOADER ANIMATION ---
+    const Preloader = ({ onComplete }) => {
+      const [progress, setProgress] = useState(0);
+
+      useEffect(() => {
+        const timer = setInterval(() => {
+          setProgress((prev) => {
+            if (prev >= 100) {
+              clearInterval(timer);
+              setTimeout(() => onComplete(), 500);
+              return 100;
+            }
+            return prev + Math.floor(Math.random() * 15) + 5;
+          });
+        }, 120);
+
+        return () => clearInterval(timer);
+      }, [onComplete]);
+
+      return (
+        <motion.div
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-[100] bg-bgDark flex flex-col items-center justify-center font-geist"
+        >
+          <div className="relative flex flex-col items-center max-w-sm w-full px-6">
+            <div className="w-16 h-16 rounded-2xl bg-cardDark border border-borderDark flex items-center justify-center mb-8 shadow-2xl relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent opacity-50" />
+              <span className="text-2xl font-bold font-space text-white tracking-widest">MH</span>
+            </div>
+
+            <div className="w-full bg-cardDark h-1 rounded-full overflow-hidden mb-4 border border-borderDark">
+              <motion.div
+                className="h-full bg-accent"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <div className="flex justify-between w-full text-xs text-secText font-mono uppercase tracking-widest">
+              <span>Business + Tech</span>
+              <span>{Math.min(progress, 100)}%</span>
+            </div>
+          </div>
+        </motion.div>
+      );
+    };
+
+    // --- MAIN APP COMPONENT ---
+    const App = () => {
+      const [loading, setLoading] = useState(true);
+      const [activeSection, setActiveSection] = useState('home');
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+      const [selectedFilter, setSelectedFilter] = useState('All');
+      const [copiedText, setCopiedText] = useState(null);
+
+      // Scroll Progress Indicator
+      const { scrollYProgress } = useScroll();
+      const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+      });
+
+      // Typing Headline State
+      const [typeIndex, setTypeIndex] = useState(0);
+      const [displayText, setDisplayText] = useState('');
+      const [isDeleting, setIsDeleting] = useState(false);
+
+      useEffect(() => {
+        if (loading) return;
+
+        const currentWord = HERO_TYPING[typeIndex];
+        const updateSpeed = isDeleting ? 40 : 90;
+
+        const timer = setTimeout(() => {
+          if (!isDeleting && displayText === currentWord) {
+            setTimeout(() => setIsDeleting(true), 1500);
+          } else if (isDeleting && displayText === '') {
+            setIsDeleting(false);
+            setTypeIndex((prev) => (prev + 1) % HERO_TYPING.length);
+          } else {
+            setDisplayText(
+              isDeleting
+                ? currentWord.substring(0, displayText.length - 1)
+                : currentWord.substring(0, displayText.length + 1)
+            );
+          }
+        }, updateSpeed);
+
+        return () => clearTimeout(timer);
+      }, [displayText, isDeleting, typeIndex, loading]);
+
+      // Copy Helper
+      const handleCopy = (text, type) => {
+        navigator.clipboard.writeText(text);
+        setCopiedText(type);
+        setTimeout(() => setCopiedText(null), 2000);
+      };
+
+      // Filtered projects
+      const filteredProjects = useMemo(() => {
+        if (selectedFilter === 'All') return PROJECTS;
+        return PROJECTS.filter(p => p.category.includes(selectedFilter) || p.tags.includes(selectedFilter));
+      }, [selectedFilter]);
+
+      if (loading) {
+        return <Preloader onComplete={() => setLoading(false)} />;
+      }
+
+      return (
+        <div className="relative min-h-screen bg-bgDark text-white font-inter selection:bg-accent selection:text-white noise-bg">
+          <ThreeBackground />
+          <CustomCursor />
+
+          <!-- Scroll Progress Bar -->
+          <motion.div
+            style={{ scaleX }}
+            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-accentHover to-white origin-left z-[90]"
+          />
+
+          <!-- NAVIGATION BAR -->
+          <header className="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+              <!-- Brand Logo -->
+              <a href="#home" className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-cardDark border border-borderDark flex items-center justify-center font-space font-bold text-accent group-hover:border-accent/50 transition-colors">
+                  MH
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-geist font-bold text-sm tracking-wide">MARUFUL HOQUE</span>
+                  <span className="text-[10px] text-secText tracking-widest font-mono uppercase">Business & Tech</span>
+                </div>
+              </a>
+
+              <!-- Desktop Navigation Links -->
+              <nav className="hidden md:flex items-center gap-1 bg-cardDark/80 p-1.5 rounded-full border border-borderDark">
+                {['home', 'about', 'skills', 'education', 'projects', 'certificates', 'contact'].map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item}`}
+                    onClick={() => setActiveSection(item)}
+                    className={`px-4 py-1.5 rounded-full text-xs font-medium capitalize transition-all duration-200 ${
+                      activeSection === item
+                        ? 'bg-accent text-white shadow-lg shadow-accent/20'
+                        : 'text-secText hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </nav>
+
+              <!-- CTA Resume Button -->
+              <div className="hidden md:flex items-center gap-3">
+                <a
+                  href="#contact"
+                  className="px-5 py-2 rounded-full border border-borderDark bg-cardDark hover:bg-accent hover:border-accent text-xs font-semibold tracking-wide transition-all duration-300 flex items-center gap-2"
+                >
+                  <Icon name="arrow-up-right" className="w-3.5 h-3.5" />
+                  <span>Connect</span>
+                </a>
+              </div>
+
+              <!-- Mobile Menu Toggle Button -->
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden w-10 h-10 rounded-xl border border-borderDark bg-cardDark flex items-center justify-center text-secText hover:text-white"
+              >
+                <Icon name={mobileMenuOpen ? "x" : "menu"} className="w-5 h-5" />
+              </button>
+            </div>
+
+            <!-- Mobile Overlay Navigation -->
+            <AnimatePresence>
+              {mobileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="md:hidden border-b border-borderDark bg-bgDark/95 backdrop-blur-xl px-6 py-6"
+                >
+                  <div className="flex flex-col gap-3">
+                    {['home', 'about', 'skills', 'education', 'projects', 'certificates', 'contact'].map((item) => (
+                      <a
+                        key={item}
+                        href={`#${item}`}
+                        onClick={() => {
+                          setActiveSection(item);
+                          setMobileMenuOpen(false);
+                        }}
+                        className="text-lg font-medium text-secText hover:text-accent capitalize py-2 border-b border-borderDark/40 flex justify-between items-center"
+                      >
+                        <span>{item}</span>
+                        <Icon name="chevron-right" className="w-4 h-4" />
+                      </a>
+                    ))}
+                    <a
+                      href={`mailto:${PROFILE_DATA.email}`}
+                      className="mt-4 w-full py-3 bg-accent text-white font-medium rounded-xl text-center text-sm flex items-center justify-center gap-2"
+                    >
+                      <Icon name="mail" className="w-4 h-4" />
+                      Email Direct
+                    </a>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </header>
+
+          <main className="relative z-10 pt-20">
+
+            {/* HERO SECTION */}
+            <section id="home" className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6 py-20 relative overflow-hidden">
+              <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                {/* Left Text Column */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className="lg:col-span-7 flex flex-col items-start"
+                >
+                  {/* Status Badge */}
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cardDark border border-borderDark text-xs font-mono text-secText mb-8 shadow-inner">
+                    <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+                    <span>Open for Internships & Opportunities</span>
+                  </div>
+
+                  {/* Dynamic Heading */}
+                  <h1 className="text-4xl sm:text-6xl font-extrabold font-geist tracking-tight leading-[1.1] mb-6">
+                    Hello, I'm <br />
+                    <span className="text-accent-gradient">MD MARUFUL HOQUE</span>
+                  </h1>
+
+                  {/* Subheading / Hybrid Identity */}
+                  <div className="text-xl sm:text-2xl font-space font-medium text-secText mb-6 h-12 flex items-center gap-2">
+                    <span>Focused on</span>
+                    <span className="text-white border-b-2 border-accent pb-0.5">{displayText}</span>
+                    <span className="animate-pulse text-accent">|</span>
+                  </div>
+
+                  <p className="text-base text-secText max-w-xl font-normal leading-relaxed mb-8">
+                    Business Administration Student at Daffodil International University. Uniting commercial strategy, management insight, and tech stack capabilities to solve complex organizational challenges.
+                  </p>
+
+                  {/* CTA Action Cluster */}
+                  <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+                    <a
+                      href="#projects"
+                      className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-accent hover:bg-accentHover text-white font-medium text-sm transition-all duration-300 shadow-lg shadow-accent/25 flex items-center justify-center gap-2 group"
+                    >
+                      <span>Explore Projects</span>
+                      <Icon name="arrow-right" className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </a>
+
+                    <a
+                      href={`mailto:${PROFILE_DATA.email}`}
+                      className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-cardDark border border-borderDark hover:border-accent/50 text-white font-medium text-sm transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      <Icon name="mail" className="w-4 h-4 text-accent" />
+                      <span>Contact Me</span>
+                    </a>
+                  </div>
+
+                  {/* Mini Quick Fact Stats */}
+                  <div className="mt-12 pt-8 border-t border-borderDark/60 w-full grid grid-cols-3 gap-4">
+                    <div>
+                      <div className="text-2xl font-bold font-geist text-white">BBA</div>
+                      <div className="text-xs text-secText">Daffodil Int. Univ</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold font-geist text-accent">Tech + Biz</div>
+                      <div className="text-xs text-secText">Hybrid Mindset</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold font-geist text-white">Dhaka</div>
+                      <div className="text-xs text-secText">Bangladesh</div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Right Interactive Visual Frame */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="lg:col-span-5 flex justify-center"
+                >
+                  <div className="relative w-full max-w-md aspect-square rounded-3xl p-1 bg-gradient-to-b from-borderDark via-cardDark to-borderDark shadow-2xl">
+                    <div className="w-full h-full rounded-[22px] bg-bgSecondary p-6 flex flex-col justify-between relative overflow-hidden glass-card">
+                      
+                      {/* Decorative Geometric Ambient Background */}
+                      <div className="absolute top-0 right-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
+                      <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+
+                      {/* Header Badge inside Card */}
+                      <div className="flex items-center justify-between border-b border-borderDark pb-4 relative z-10">
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                          <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                        </div>
+                        <span className="text-[11px] font-mono text-secText">marufulhoque.dev.bd</span>
+                      </div>
+
+                      {/* Center Content Mockup */}
+                      <div className="my-auto py-6 relative z-10 flex flex-col items-center text-center">
+                        <div className="w-24 h-24 rounded-2xl bg-gradient-to-tr from-accent to-accentHover p-0.5 mb-4 shadow-xl">
+                          <div className="w-full h-full bg-bgDark rounded-[14px] flex items-center justify-center font-space font-bold text-3xl text-white">
+                            MH
+                          </div>
+                        </div>
+                        <h3 className="text-lg font-bold font-geist">MD MARUFUL HOQUE</h3>
+                        <p className="text-xs text-secText font-mono mt-1">Management & Future Founder</p>
+
+                        <div className="mt-6 flex flex-wrap justify-center gap-2">
+                          {['Python', 'Flutter', 'Business Strategy', 'AI Solutions', 'Management'].map((badge) => (
+                            <span key={badge} className="px-2.5 py-1 rounded-md bg-cardDark border border-borderDark text-[11px] text-secText font-mono">
+                              {badge}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Card Footer Quick Link */}
+                      <div className="pt-4 border-t border-borderDark flex items-center justify-between text-xs text-secText relative z-10 font-mono">
+                        <span>Location: Savar, Dhaka</span>
+                        <a href={PROFILE_DATA.github} target="_blank" rel="noreferrer" className="text-accent hover:underline flex items-center gap-1">
+                          GitHub <Icon name="external-link" className="w-3 h-3" />
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+                </motion.div>
+
+              </div>
+            </section>
+
+            {/* ABOUT ME SECTION */}
+            <section id="about" className="py-24 px-6 relative border-t border-borderDark/40">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex flex-col items-center text-center mb-16">
+                  <span className="text-xs font-mono uppercase tracking-widest text-accent mb-2">Background & Vision</span>
+                  <h2 className="text-3xl sm:text-5xl font-bold font-geist tracking-tight">Bridging Strategy & Technology</h2>
+                  <div className="w-12 h-1 bg-accent rounded-full mt-4" />
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+                  {/* Left Column: Vision Narrative */}
+                  <div className="lg:col-span-7 glass-card rounded-2xl p-8 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-xl font-bold font-geist mb-4 text-white">Not Just Code. Business Solutions.</h3>
+                      <p className="text-secText leading-relaxed mb-6">
+                        I am currently pursuing my Bachelor of Business Administration (BBA) in Management at Daffodil International University. Rather than viewing technology purely through code, I approach software as a strategic driver for commercial efficiency, user growth, and operational scale.
+                      </p>
+                      <p className="text-secText leading-relaxed mb-6">
+                        My goal is to position myself as a versatile leader who understands both business balance sheets and modern software architecture. Whether automating workflows using Python, building responsive apps with Flutter, or engineering market strategies, I aim to build high-impact enterprise initiatives.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-borderDark">
+                      <div className="p-3 bg-bgDark/50 rounded-xl border border-borderDark">
+                        <div className="text-xs text-secText font-mono">University</div>
+                        <div className="text-sm font-semibold text-white mt-1">Daffodil Int.</div>
+                      </div>
+                      <div className="p-3 bg-bgDark/50 rounded-xl border border-borderDark">
+                        <div className="text-xs text-secText font-mono">Department</div>
+                        <div className="text-sm font-semibold text-white mt-1">Management</div>
+                      </div>
+                      <div className="p-3 bg-bgDark/50 rounded-xl border border-borderDark">
+                        <div className="text-xs text-secText font-mono">Location</div>
+                        <div className="text-sm font-semibold text-white mt-1">Dhaka, BD</div>
+                      </div>
+                      <div className="p-3 bg-bgDark/50 rounded-xl border border-borderDark">
+                        <div className="text-xs text-secText font-mono">Focus</div>
+                        <div className="text-sm font-semibold text-white mt-1">Entrepreneur</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Key Pillars */}
+                  <div className="lg:col-span-5 flex flex-col gap-4">
+                    <div className="glass-card rounded-2xl p-6 flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0 text-accent">
+                        <Icon name="briefcase" className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold font-geist text-base text-white">Business Management</h4>
+                        <p className="text-xs text-secText mt-1 leading-relaxed">
+                          Trained in management principles, resource allocation, business logic, and enterprise communications.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="glass-card rounded-2xl p-6 flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0 text-accent">
+                        <Icon name="terminal" className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold font-geist text-base text-white">Technical Aptitude</h4>
+                        <p className="text-xs text-secText mt-1 leading-relaxed">
+                          Proficient in Python, Linux, Django web framework, and Flutter cross-platform mobile development.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="glass-card rounded-2xl p-6 flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0 text-accent">
+                        <Icon name="rocket" className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold font-geist text-base text-white">Entrepreneurial Mindset</h4>
+                        <p className="text-xs text-secText mt-1 leading-relaxed">
+                          Constant learner exploring market opportunities, AI workflow speed, and venture creation models.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* SKILLS SECTION */}
+            <section id="skills" className="py-24 px-6 relative bg-bgSecondary/50 border-t border-borderDark/40">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex flex-col items-center text-center mb-16">
+                  <span className="text-xs font-mono uppercase tracking-widest text-accent mb-2">Capabilities</span>
+                  <h2 className="text-3xl sm:text-5xl font-bold font-geist tracking-tight">Business & Technical Skillset</h2>
+                  <p className="text-secText mt-3 text-sm max-w-lg">
+                    A balanced toolkit combining strategic management soft skills with practical technical implementation.
+                  </p>
+                  <div className="w-12 h-1 bg-accent rounded-full mt-4" />
+                </div>
+
+                {/* Section Split: Business vs Technical */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                  
+                  {/* Business & Leadership Pillar */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-8 pb-3 border-b border-borderDark">
+                      <Icon name="award" className="w-6 h-6 text-accent" />
+                      <h3 className="text-xl font-bold font-geist">Business & Leadership</h3>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                      {BUSINESS_SKILLS.map((item, idx) => (
+                        <div key={idx} className="glass-card p-5 rounded-xl transition-all duration-300 hover:border-accent/40">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-3">
+                              <div className="p-2 rounded-lg bg-accent/10 text-accent">
+                                <Icon name={item.icon} className="w-4 h-4" />
+                              </div>
+                              <span className="font-semibold text-sm text-white">{item.name}</span>
+                            </div>
+                            <span className="text-xs font-mono text-secText">{item.level}%</span>
+                          </div>
+                          <p className="text-xs text-secText mb-3">{item.desc}</p>
+                          <div className="w-full h-1.5 bg-bgDark rounded-full overflow-hidden">
+                            <div className="h-full bg-accent rounded-full" style={{ width: `${item.level}%` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Technical & Developer Pillar */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-8 pb-3 border-b border-borderDark">
+                      <Icon name="code" className="w-6 h-6 text-accent" />
+                      <h3 className="text-xl font-bold font-geist">Technical Skills & Tools</h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {TECHNICAL_SKILLS.map((tech, idx) => (
+                        <div key={idx} className="glass-card p-5 rounded-xl hover:border-accent/40 transition-all duration-300 flex flex-col justify-between">
+                          <div>
+                            <div className="flex items-center justify-between mb-3">
+                              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent/10 text-accent uppercase tracking-wider">
+                                {tech.category}
+                              </span>
+                              <Icon name={tech.icon} className="w-4 h-4 text-secText" />
+                            </div>
+                            <h4 className="font-bold text-sm text-white mb-1">{tech.name}</h4>
+                            <p className="text-xs text-secText leading-relaxed">{tech.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            {/* EDUCATION TIMELINE SECTION */}
+            <section id="education" className="py-24 px-6 relative border-t border-borderDark/40">
+              <div className="max-w-5xl mx-auto">
+                <div className="flex flex-col items-center text-center mb-16">
+                  <span className="text-xs font-mono uppercase tracking-widest text-accent mb-2">Academic Roadmap</span>
+                  <h2 className="text-3xl sm:text-5xl font-bold font-geist tracking-tight">Education & Milestones</h2>
+                  <div className="w-12 h-1 bg-accent rounded-full mt-4" />
+                </div>
+
+                <div className="relative border-l-2 border-borderDark ml-4 md:ml-32 space-y-12">
+                  {EDUCATION.map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      className="relative pl-8 md:pl-12"
+                    >
+                      {/* Timeline Dot Indicator */}
+                      <div className={`absolute -left-[9px] top-1.5 w-4 h-4 rounded-full border-2 bg-bgDark ${
+                        item.status === 'Current' ? 'border-accent bg-accent animate-ping' : 'border-borderDark bg-cardDark'
+                      }`} />
+                      <div className={`absolute -left-[9px] top-1.5 w-4 h-4 rounded-full border-2 ${
+                        item.status === 'Current' ? 'border-accent bg-accent' : 'border-borderDark bg-cardDark'
+                      }`} />
+
+                      {/* Content Card */}
+                      <div className="glass-card p-6 rounded-2xl relative">
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                          <span className="text-xs font-mono text-accent font-semibold">{item.period}</span>
+                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono border border-borderDark bg-bgDark text-secText uppercase">
+                            {item.status}
+                          </span>
+                        </div>
+
+                        <h3 className="text-xl font-bold font-geist text-white">{item.degree}</h3>
+                        <p className="text-sm text-accent font-medium mt-0.5">{item.field}</p>
+                        <p className="text-xs text-secText mt-1 flex items-center gap-1 font-mono">
+                          <Icon name="map-pin" className="w-3 h-3" />
+                          {item.institution} — {item.location}
+                        </p>
+
+                        <p className="text-xs text-secText mt-4 leading-relaxed pt-4 border-t border-borderDark/60">
+                          {item.details}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* FEATURED PROJECTS SECTION */}
+            <section id="projects" className="py-24 px-6 relative bg-bgSecondary/50 border-t border-borderDark/40">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex flex-col items-center text-center mb-12">
+                  <span className="text-xs font-mono uppercase tracking-widest text-accent mb-2">Portfolio</span>
+                  <h2 className="text-3xl sm:text-5xl font-bold font-geist tracking-tight">Featured Projects & Concepts</h2>
+                  <p className="text-secText mt-3 text-sm max-w-lg">
+                    Demonstrating analytical business strategic models along with hands-on software development builds.
+                  </p>
+                  <div className="w-12 h-1 bg-accent rounded-full mt-4" />
+                </div>
+
+                {/* Filter Pills */}
+                <div className="flex justify-center flex-wrap gap-2 mb-12">
+                  {['All', 'Business', 'Python', 'Flutter', 'AI'].map((filter) => (
+                    <button
+                      key={filter}
+                      onClick={() => setSelectedFilter(filter)}
+                      className={`px-4 py-1.5 rounded-full text-xs font-medium font-mono transition-all duration-200 ${
+                        selectedFilter === filter
+                          ? 'bg-accent text-white shadow-md shadow-accent/20'
+                          : 'bg-cardDark border border-borderDark text-secText hover:text-white'
+                      }`}
+                    >
+                      {filter}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Project Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {filteredProjects.map((project, idx) => (
+                    <motion.div
+                      key={idx}
+                      layout
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="glass-card rounded-2xl p-7 flex flex-col justify-between group hover:border-accent/40 transition-all duration-300"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-[11px] font-mono text-accent bg-accent/10 px-2.5 py-1 rounded-md border border-accent/20">
+                            {project.category}
+                          </span>
+                          <div className="flex gap-2">
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="p-2 rounded-lg bg-bgDark border border-borderDark text-secText hover:text-white hover:border-accent transition-colors"
+                              title="Source Code"
+                            >
+                              <Icon name="github" className="w-4 h-4" />
+                            </a>
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold font-geist text-white group-hover:text-accent transition-colors mb-2">
+                          {project.title}
+                        </h3>
+
+                        <p className="text-xs text-secText leading-relaxed mb-6">
+                          {project.desc}
+                        </p>
+                      </div>
+
+                      <div className="pt-4 border-t border-borderDark/60 flex flex-wrap gap-2">
+                        {project.tags.map((tag, tIdx) => (
+                          <span key={tIdx} className="text-[10px] font-mono text-secText bg-bgDark px-2 py-0.5 rounded border border-borderDark">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* CERTIFICATES SECTION */}
+            <section id="certificates" className="py-24 px-6 relative border-t border-borderDark/40">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex flex-col items-center text-center mb-16">
+                  <span className="text-xs font-mono uppercase tracking-widest text-accent mb-2">Qualifications</span>
+                  <h2 className="text-3xl sm:text-5xl font-bold font-geist tracking-tight">Certifications & Training</h2>
+                  <div className="w-12 h-1 bg-accent rounded-full mt-4" />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {CERTIFICATES.map((cert, idx) => (
+                    <div key={idx} className="glass-card p-6 rounded-2xl flex items-start gap-5 hover:border-accent/40 transition-all duration-300">
+                      <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0 text-accent">
+                        <Icon name={cert.icon} className="w-6 h-6" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[11px] font-mono text-accent">{cert.date}</span>
+                          <span className="text-[10px] font-mono text-secText uppercase">{cert.issuer}</span>
+                        </div>
+                        <h3 className="font-bold font-geist text-base text-white mb-2">{cert.title}</h3>
+                        <p className="text-xs text-secText leading-relaxed">{cert.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* CONTACT SECTION */}
+            <section id="contact" className="py-24 px-6 relative bg-bgSecondary/50 border-t border-borderDark/40">
+              <div className="max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                  
+                  {/* Left Information Column */}
+                  <div className="lg:col-span-5">
+                    <span className="text-xs font-mono uppercase tracking-widest text-accent mb-2 block">Get in touch</span>
+                    <h2 className="text-3xl sm:text-5xl font-bold font-geist tracking-tight mb-6">Let's Connect & Collaborate</h2>
+                    <p className="text-secText text-sm leading-relaxed mb-8">
+                      Open for business strategy roles, management internships, tech partnerships, and future entrepreneurial projects.
+                    </p>
+
+                    {/* Direct Details Box */}
+                    <div className="flex flex-col gap-4 mb-8">
+                      <div className="glass-card p-4 rounded-xl flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2.5 rounded-lg bg-accent/10 text-accent">
+                            <Icon name="mail" className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <div className="text-[10px] font-mono text-secText">EMAIL DIRECT</div>
+                            <div className="text-xs font-semibold text-white mt-0.5">{PROFILE_DATA.email}</div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleCopy(PROFILE_DATA.email, 'email')}
+                          className="px-3 py-1.5 rounded-lg bg-bgDark border border-borderDark text-[11px] font-mono text-secText hover:text-white hover:border-accent transition-colors"
+                        >
+                          {copiedText === 'email' ? 'Copied!' : 'Copy'}
+                        </button>
+                      </div>
+
+                      <div className="glass-card p-4 rounded-xl flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2.5 rounded-lg bg-accent/10 text-accent">
+                            <Icon name="phone" className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <div className="text-[10px] font-mono text-secText">PHONE / PHONE CALL</div>
+                            <div className="text-xs font-semibold text-white mt-0.5">{PROFILE_DATA.phone}</div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleCopy(PROFILE_DATA.phone, 'phone')}
+                          className="px-3 py-1.5 rounded-lg bg-bgDark border border-borderDark text-[11px] font-mono text-secText hover:text-white hover:border-accent transition-colors"
+                        >
+                          {copiedText === 'phone' ? 'Copied!' : 'Copy'}
+                        </button>
+                      </div>
+
+                      <div className="glass-card p-4 rounded-xl flex items-center gap-3">
+                        <div className="p-2.5 rounded-lg bg-accent/10 text-accent">
+                          <Icon name="map-pin" className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <div className="text-[10px] font-mono text-secText">LOCATION</div>
+                          <div className="text-xs font-semibold text-white mt-0.5">{PROFILE_DATA.location}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Social Profile Links */}
+                    <div className="flex gap-3">
+                      <a
+                        href={PROFILE_DATA.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 py-3 rounded-xl glass-card text-center text-xs font-semibold text-white hover:border-accent transition-colors flex items-center justify-center gap-2"
+                      >
+                        <Icon name="github" className="w-4 h-4" />
+                        GitHub
+                      </a>
+                      <a
+                        href="#"
+                        className="flex-1 py-3 rounded-xl glass-card text-center text-xs font-semibold text-white hover:border-accent transition-colors flex items-center justify-center gap-2"
+                      >
+                        <Icon name="linkedin" className="w-4 h-4 text-accent" />
+                        LinkedIn
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Right Interactive Contact Form */}
+                  <div className="lg:col-span-7 glass-card p-8 rounded-2xl relative">
+                    <form onSubmit={(e) => { e.preventDefault(); alert("Thank you! Your message has been sent successfully."); }} className="flex flex-col gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-xs font-mono text-secText mb-2 uppercase">Your Name</label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="John Doe"
+                            className="w-full px-4 py-3 rounded-xl bg-bgDark border border-borderDark text-sm text-white focus:outline-none focus:border-accent transition-colors"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-mono text-secText mb-2 uppercase">Your Email</label>
+                          <input
+                            type="email"
+                            required
+                            placeholder="john@example.com"
+                            className="w-full px-4 py-3 rounded-xl bg-bgDark border border-borderDark text-sm text-white focus:outline-none focus:border-accent transition-colors"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-mono text-secText mb-2 uppercase">Subject</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="Internship / Business Proposal / Collaboration"
+                          className="w-full px-4 py-3 rounded-xl bg-bgDark border border-borderDark text-sm text-white focus:outline-none focus:border-accent transition-colors"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-mono text-secText mb-2 uppercase">Message</label>
+                        <textarea
+                          rows="5"
+                          required
+                          placeholder="Write your message here..."
+                          className="w-full px-4 py-3 rounded-xl bg-bgDark border border-borderDark text-sm text-white focus:outline-none focus:border-accent transition-colors resize-none"
+                        ></textarea>
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="w-full py-4 rounded-xl bg-accent hover:bg-accentHover text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-accent/20 flex items-center justify-center gap-2"
+                      >
+                        <Icon name="send" className="w-4 h-4" />
+                        <span>Send Message</span>
+                      </button>
+                    </form>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+          </main>
+
+          {/* FOOTER */}
+          <footer className="border-t border-borderDark py-12 px-6 bg-bgDark relative z-10 text-xs font-mono text-secText">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-cardDark border border-borderDark flex items-center justify-center font-space font-bold text-accent">
+                  MH
+                </div>
+                <div>
+                  <div className="text-white font-semibold font-geist">MD MARUFUL HOQUE</div>
+                  <div className="text-[10px]">Business Management & Tech Hybrid</div>
+                </div>
+              </div>
+
+              <div className="text-center md:text-right">
+                <p>© {new Date().getFullYear()} MD MARUFUL HOQUE. All rights reserved.</p>
+                <p className="mt-1 text-[10px] text-secText/70">Designed with Apple & Linear Design Language</p>
+              </div>
+            </div>
+          </footer>
+
+        </div>
+      );
+    };
+
+    // Render App to DOM
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
+
