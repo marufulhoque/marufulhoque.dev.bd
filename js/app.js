@@ -1,267 +1,1249 @@
-/* ==========================================================================
-   app.js — Interactive behaviors for the portfolio
-   - Smooth scrolling
-   - Mobile nav toggle
-   - Intersection Observer reveal animations
-   - Typing animation for hero subtitle
-   - Back to top button
-   - Active nav highlighting
-   - Project modal
-   ========================================================================== */
+/* =========================================================
+   MD MARUFUL HAQUE — PORTFOLIO
+   Main JavaScript
+   ========================================================= */
 
-(function () {
-  'use strict';
+"use strict";
 
-  // DOM selectors
-  const doc = document;
-  const navToggle = doc.getElementById('nav-toggle');
-  const navList = doc.getElementById('nav-list');
-  const navLinks = doc.querySelectorAll('.nav-link');
-  const backToTop = doc.getElementById('back-to-top');
-  const yearEl = doc.getElementById('year');
 
-  // Insert current year in footer
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+/* =========================================================
+   1. DOM READY
+   ========================================================= */
 
-  // Smooth scroll for internal links
-  function smoothScroll(e) {
-    if (!this.hash) return;
-    e.preventDefault();
-    const target = doc.querySelector(this.hash);
-    if (!target) return;
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Close mobile nav when clicked
-    if (navList.classList.contains('open')) toggleNav(false);
-  }
+document.addEventListener("DOMContentLoaded", () => {
 
-  navLinks.forEach(link => link.addEventListener('click', smoothScroll));
+  initYear();
+  initHeader();
+  initMobileNavigation();
+  initTypingEffect();
+  initScrollReveal();
+  initActiveNavigation();
+  initBackToTop();
+  initProjectModal();
+  initContactForm();
 
-  // Nav toggle (mobile)
-  function toggleNav(force) {
-    const isOpen = typeof force === 'boolean' ? force : !navList.classList.contains('open');
-    navList.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-  }
+});
 
-  if (navToggle) {
-    navToggle.addEventListener('click', function () {
-      toggleNav();
-    });
-  }
 
-  // Intersection Observer for reveal animations
-  const revealElems = doc.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+/* =========================================================
+   2. CURRENT YEAR
+   ========================================================= */
 
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        // Optional: unobserve after reveal for performance
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.12
-  });
+function initYear() {
 
-  revealElems.forEach(el => revealObserver.observe(el));
+  const yearElement = document.getElementById("year");
 
-  // Back to top button visibility
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY || window.pageYOffset;
-    if (y > 600) backToTop.classList.add('show');
-    else backToTop.classList.remove('show');
-  });
+  if (!yearElement) return;
 
-  backToTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  yearElement.textContent = new Date().getFullYear();
 
-  // Active nav link highlighting via IntersectionObserver
-  const sections = Array.from(doc.querySelectorAll('main .section')).map(s => {
-    return { id: s.id, el: s };
-  });
+}
 
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        doc.querySelectorAll('.nav-link').forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-        });
-      }
-    });
-  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
 
-  sections.forEach(s => sectionObserver.observe(s.el));
+/* =========================================================
+   3. HEADER SCROLL EFFECT
+   ========================================================= */
 
-  // Typing animation (accessible)
-  class Typer {
-    constructor(el) {
-      this.el = el;
-      this.strings = JSON.parse(el.getAttribute('data-strings') || '[]');
-      this.delay = 80;
-      this.pause = 1200;
-      this.loop = true;
-      this.index = 0;
-      this.pos = 0;
-      this.typing = true;
-      this._mounted = false;
-      this.ariaSpan = null;
-      // create inner span for aria-live
-      this.init();
+function initHeader() {
+
+  const header = document.getElementById("site-header");
+
+  if (!header) return;
+
+  const updateHeader = () => {
+
+    if (window.scrollY > 30) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
     }
 
-    init() {
-      this.ariaSpan = document.createElement('span');
-      this.ariaSpan.setAttribute('aria-live', 'polite');
-      this.ariaSpan.className = 'typing-inner';
-      this.el.appendChild(this.ariaSpan);
-      this._mounted = true;
-      this.tick();
-    }
-
-    tick() {
-      if (!this._mounted) return;
-      const current = this.strings[this.index] || '';
-      if (this.typing) {
-        this.pos++;
-        if (this.pos <= current.length) {
-          this.ariaSpan.textContent = current.slice(0, this.pos);
-          setTimeout(() => this.tick(), this.delay + Math.random() * 40);
-        } else {
-          this.typing = false;
-          setTimeout(() => this.tick(), this.pause);
-        }
-      } else {
-        this.pos--;
-        if (this.pos >= 0) {
-          this.ariaSpan.textContent = current.slice(0, this.pos);
-          setTimeout(() => this.tick(), this.delay / 2);
-        } else {
-          this.typing = true;
-          this.index = (this.index + 1) % this.strings.length;
-          setTimeout(() => this.tick(), 250);
-        }
-      }
-    }
-  }
-
-  const typingEl = doc.getElementById('typing');
-  if (typingEl) new Typer(typingEl);
-
-  // Project modal behavior
-  const projectCards = doc.querySelectorAll('.project-card');
-  const modal = doc.getElementById('project-modal');
-  const modalTitle = doc.getElementById('modal-title');
-  const modalSub = doc.querySelector('.modal-sub');
-  const modalDesc = doc.querySelector('.modal-desc');
-  const modalVisit = doc.getElementById('modal-visit');
-  const modalClose = doc.getElementById('modal-close');
-  const modalClose2 = doc.getElementById('modal-close-2');
-
-  const projectData = {
-    1: {
-      title: 'Premium Portfolio Website',
-      sub: 'Editorial, Minimal, Responsive',
-      desc: 'A handcrafted portfolio focusing on typographic scale, whitespace and subtle motion. Built with semantic HTML, vanilla CSS and JavaScript for smooth interactions.',
-      visit: 'https://github.com/MUHIB-143'
-    },
-    2: {
-      title: 'Python Django Web Application',
-      sub: 'Server-rendered app with Django',
-      desc: 'A structured Django web application prototype with clear models, templates and accessible UI patterns.',
-      visit: 'https://github.com/MUHIB-143'
-    },
-    3: {
-      title: 'Flutter Mobile Application',
-      sub: 'Cross-platform mobile prototype',
-      desc: 'A mobile application built using Flutter that prioritizes native performance and polished UI components.',
-      visit: 'https://github.com/MUHIB-143'
-    }
   };
 
-  function openModal(id) {
-    const data = projectData[id];
-    if (!data || !modal) return;
-    modalTitle.textContent = data.title;
-    if (modalSub) modalSub.textContent = data.sub;
-    if (modalDesc) modalDesc.textContent = data.desc;
-    if (modalVisit) {
-      modalVisit.href = data.visit || '#';
+  updateHeader();
+
+  window.addEventListener(
+    "scroll",
+    updateHeader,
+    { passive: true }
+  );
+
+}
+
+
+/* =========================================================
+   4. MOBILE NAVIGATION
+   ========================================================= */
+
+function initMobileNavigation() {
+
+  const toggle = document.getElementById("nav-toggle");
+  const navList = document.getElementById("nav-list");
+
+  if (!toggle || !navList) return;
+
+
+  function openMenu() {
+
+    navList.classList.add("open");
+
+    toggle.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    const icon = toggle.querySelector("i");
+
+    if (icon) {
+
+      icon.classList.remove(
+        "fa-bars"
+      );
+
+      icon.classList.add(
+        "fa-xmark"
+      );
+
     }
-    modal.setAttribute('aria-hidden', 'false');
-    // trap focus inside modal
-    modal.querySelector('.modal-dialog').focus();
-    document.body.style.overflow = 'hidden';
+
   }
+
+
+  function closeMenu() {
+
+    navList.classList.remove("open");
+
+    toggle.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    const icon = toggle.querySelector("i");
+
+    if (icon) {
+
+      icon.classList.remove(
+        "fa-xmark"
+      );
+
+      icon.classList.add(
+        "fa-bars"
+      );
+
+    }
+
+  }
+
+
+  toggle.addEventListener(
+    "click",
+    () => {
+
+      const isOpen =
+        navList.classList.contains("open");
+
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+
+    }
+  );
+
+
+  /* Close menu when clicking a navigation link */
+
+  const links =
+    navList.querySelectorAll("a");
+
+  links.forEach(link => {
+
+    link.addEventListener(
+      "click",
+      () => {
+
+        closeMenu();
+
+      }
+    );
+
+  });
+
+
+  /* Close menu when clicking outside */
+
+  document.addEventListener(
+    "click",
+    event => {
+
+      const clickedInsideNav =
+        navList.contains(event.target);
+
+      const clickedToggle =
+        toggle.contains(event.target);
+
+      if (
+        !clickedInsideNav &&
+        !clickedToggle
+      ) {
+
+        closeMenu();
+
+      }
+
+    }
+  );
+
+
+  /* Close menu with Escape */
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (event.key === "Escape") {
+
+        closeMenu();
+
+        toggle.blur();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   5. TYPING EFFECT
+   ========================================================= */
+
+function initTypingEffect() {
+
+  const typingElement =
+    document.getElementById("typing");
+
+  if (!typingElement) return;
+
+
+  let strings = [];
+
+  try {
+
+    strings = JSON.parse(
+      typingElement.dataset.strings || "[]"
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "Typing strings could not be parsed.",
+      error
+    );
+
+  }
+
+
+  if (!Array.isArray(strings) || strings.length === 0) {
+    return;
+  }
+
+
+  const prefersReducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+  if (prefersReducedMotion) {
+
+    typingElement.textContent =
+      strings[0];
+
+    return;
+
+  }
+
+
+  let stringIndex = 0;
+  let characterIndex = 0;
+
+  let deleting = false;
+
+
+  const typingSpeed = 75;
+  const deletingSpeed = 40;
+  const pauseAfterTyping = 1800;
+  const pauseAfterDeleting = 500;
+
+
+  function type() {
+
+    const currentString =
+      strings[stringIndex];
+
+
+    if (!deleting) {
+
+      characterIndex++;
+
+      typingElement.textContent =
+        currentString.slice(
+          0,
+          characterIndex
+        );
+
+
+      if (
+        characterIndex >=
+        currentString.length
+      ) {
+
+        deleting = true;
+
+        setTimeout(
+          type,
+          pauseAfterTyping
+        );
+
+        return;
+
+      }
+
+
+      setTimeout(
+        type,
+        typingSpeed
+      );
+
+      return;
+
+    }
+
+
+    characterIndex--;
+
+    typingElement.textContent =
+      currentString.slice(
+        0,
+        characterIndex
+      );
+
+
+    if (characterIndex <= 0) {
+
+      deleting = false;
+
+      stringIndex =
+        (stringIndex + 1) %
+        strings.length;
+
+      setTimeout(
+        type,
+        pauseAfterDeleting
+      );
+
+      return;
+
+    }
+
+
+    setTimeout(
+      type,
+      deletingSpeed
+    );
+
+  }
+
+
+  type();
+
+}
+
+
+/* =========================================================
+   6. SCROLL REVEAL
+   ========================================================= */
+
+function initScrollReveal() {
+
+  const elements =
+    document.querySelectorAll(
+      ".reveal-up, .reveal-left"
+    );
+
+  if (!elements.length) return;
+
+
+  const prefersReducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+  if (
+    prefersReducedMotion ||
+    !("IntersectionObserver" in window)
+  ) {
+
+    elements.forEach(
+      element => {
+        element.classList.add(
+          "is-visible"
+        );
+      }
+    );
+
+    return;
+
+  }
+
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add(
+            "is-visible"
+          );
+
+          observer.unobserve(
+            entry.target
+          );
+
+        });
+
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -50px 0px"
+      }
+    );
+
+
+  elements.forEach(element => {
+
+    observer.observe(element);
+
+  });
+
+}
+
+
+/* =========================================================
+   7. ACTIVE NAVIGATION
+   ========================================================= */
+
+function initActiveNavigation() {
+
+  const sections =
+    document.querySelectorAll(
+      "main section[id]"
+    );
+
+  const navLinks =
+    document.querySelectorAll(
+      ".nav-link"
+    );
+
+
+  if (
+    !sections.length ||
+    !navLinks.length
+  ) {
+    return;
+  }
+
+
+  const linkMap = new Map();
+
+
+  navLinks.forEach(link => {
+
+    const href =
+      link.getAttribute("href");
+
+    if (
+      href &&
+      href.startsWith("#")
+    ) {
+
+      linkMap.set(
+        href.substring(1),
+        link
+      );
+
+    }
+
+  });
+
+
+  if (!("IntersectionObserver" in window)) {
+    return;
+  }
+
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+
+          const id =
+            entry.target.id;
+
+          navLinks.forEach(link => {
+
+            link.classList.remove(
+              "active"
+            );
+
+          });
+
+
+          const activeLink =
+            linkMap.get(id);
+
+
+          if (activeLink) {
+
+            activeLink.classList.add(
+              "active"
+            );
+
+          }
+
+        });
+
+      },
+      {
+        rootMargin:
+          "-30% 0px -60% 0px",
+
+        threshold: 0
+      }
+    );
+
+
+  sections.forEach(section => {
+
+    observer.observe(section);
+
+  });
+
+}
+
+
+/* =========================================================
+   8. BACK TO TOP
+   ========================================================= */
+
+function initBackToTop() {
+
+  const button =
+    document.getElementById(
+      "back-to-top"
+    );
+
+  if (!button) return;
+
+
+  const updateVisibility = () => {
+
+    if (window.scrollY > 600) {
+
+      button.classList.add(
+        "visible"
+      );
+
+    } else {
+
+      button.classList.remove(
+        "visible"
+      );
+
+    }
+
+  };
+
+
+  updateVisibility();
+
+
+  window.addEventListener(
+    "scroll",
+    updateVisibility,
+    { passive: true }
+  );
+
+
+  button.addEventListener(
+    "click",
+    () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   9. PROJECT MODAL
+   ========================================================= */
+
+function initProjectModal() {
+
+  const modal =
+    document.getElementById(
+      "project-modal"
+    );
+
+  const modalTitle =
+    document.getElementById(
+      "modal-title"
+    );
+
+  const modalSub =
+    modal?.querySelector(
+      ".modal-sub"
+    );
+
+  const modalDesc =
+    modal?.querySelector(
+      ".modal-desc"
+    );
+
+  const modalList =
+    modal?.querySelector(
+      ".modal-list"
+    );
+
+  const modalVisit =
+    document.getElementById(
+      "modal-visit"
+    );
+
+  const closeButton =
+    document.getElementById(
+      "modal-close"
+    );
+
+  const closeButtonTwo =
+    document.getElementById(
+      "modal-close-2"
+    );
+
+
+  const projectCards =
+    document.querySelectorAll(
+      ".project-card"
+    );
+
+
+  if (
+    !modal ||
+    !projectCards.length
+  ) {
+    return;
+  }
+
+
+  /*
+   * Add your actual GitHub project URLs here.
+   *
+   * Replace the example URLs with your real repositories.
+   */
+
+  const projects = {
+
+    "1": {
+      title:
+        "Premium Portfolio Website",
+
+      subtitle:
+        "Portfolio Website — HTML, CSS, JavaScript",
+
+      description:
+        "A premium personal portfolio website designed around minimal editorial aesthetics, refined typography, responsive layouts and smooth interactions.",
+
+      role:
+        "Designer & Frontend Developer",
+
+      tech:
+        "HTML, CSS, JavaScript",
+
+      time:
+        "Personal Project",
+
+      github:
+        "https://github.com/MUHIB-143"
+
+    },
+
+
+    "2": {
+      title:
+        "Python Django Web Application",
+
+      subtitle:
+        "Full-Stack Web Application — Python & Django",
+
+      description:
+        "A structured full-stack web application prototype developed with Python and Django, focusing on clean architecture, accessibility and usability.",
+
+      role:
+        "Full-Stack Developer",
+
+      tech:
+        "Python, Django, HTML, CSS",
+
+      time:
+        "Personal Project",
+
+      github:
+        "https://github.com/MUHIB-143"
+
+    },
+
+
+    "3": {
+      title:
+        "Flutter Mobile Application",
+
+      subtitle:
+        "Cross-Platform Mobile Application — Flutter",
+
+      description:
+        "A cross-platform mobile application created with Flutter, focusing on a clean user experience, responsive layouts and polished interface design.",
+
+      role:
+        "Flutter Developer",
+
+      tech:
+        "Flutter, Dart, UX",
+
+      time:
+        "Personal Project",
+
+      github:
+        "https://github.com/MUHIB-143"
+
+    }
+
+  };
+
+
+  let previouslyFocusedElement = null;
+
+
+  function openModal(projectId) {
+
+    const project =
+      projects[projectId];
+
+
+    if (!project) {
+      return;
+    }
+
+
+    previouslyFocusedElement =
+      document.activeElement;
+
+
+    if (modalTitle) {
+
+      modalTitle.textContent =
+        project.title;
+
+    }
+
+
+    if (modalSub) {
+
+      modalSub.textContent =
+        project.subtitle;
+
+    }
+
+
+    if (modalDesc) {
+
+      modalDesc.textContent =
+        project.description;
+
+    }
+
+
+    if (modalList) {
+
+      modalList.innerHTML = `
+        <li>
+          <strong>Role:</strong>
+          ${escapeHTML(project.role)}
+        </li>
+
+        <li>
+          <strong>Tech:</strong>
+          ${escapeHTML(project.tech)}
+        </li>
+
+        <li>
+          <strong>Time:</strong>
+          ${escapeHTML(project.time)}
+        </li>
+      `;
+
+    }
+
+
+    if (modalVisit) {
+
+      modalVisit.href =
+        project.github;
+
+    }
+
+
+    modal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+
+    document.body.style.overflow =
+      "hidden";
+
+
+    requestAnimationFrame(() => {
+
+      closeButton?.focus();
+
+    });
+
+  }
+
 
   function closeModal() {
-    if (!modal) return;
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+
+    modal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+    document.body.style.overflow =
+      "";
+
+
+    if (
+      previouslyFocusedElement &&
+      typeof previouslyFocusedElement.focus ===
+        "function"
+    ) {
+
+      previouslyFocusedElement.focus();
+
+    }
+
   }
+
 
   projectCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const id = card.getAttribute('data-project');
-      openModal(id);
-    });
-    // keyboard accessibility
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const id = card.getAttribute('data-project');
-        openModal(id);
+
+    card.addEventListener(
+      "click",
+      () => {
+
+        const projectId =
+          card.dataset.project;
+
+        openModal(projectId);
+
       }
-    });
+    );
+
+
+    card.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+
+          event.preventDefault();
+
+          const projectId =
+            card.dataset.project;
+
+          openModal(projectId);
+
+        }
+
+      }
+    );
+
   });
 
-  if (modalClose) modalClose.addEventListener('click', closeModal);
-  if (modalClose2) modalClose2.addEventListener('click', closeModal);
 
-  // Close modal on backdrop click
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-  }
+  closeButton?.addEventListener(
+    "click",
+    closeModal
+  );
 
-  // Close modal on ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (modal && modal.getAttribute('aria-hidden') === 'false') closeModal();
-      if (navList.classList.contains('open')) toggleNav(false);
+
+  closeButtonTwo?.addEventListener(
+    "click",
+    closeModal
+  );
+
+
+  /*
+   * Close when clicking outside
+   */
+
+  modal.addEventListener(
+    "click",
+    event => {
+
+      if (
+        event.target === modal
+      ) {
+
+        closeModal();
+
+      }
+
     }
+  );
+
+
+  /*
+   * Escape key
+   */
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      const isOpen =
+        modal.getAttribute(
+          "aria-hidden"
+        ) === "false";
+
+
+      if (
+        isOpen &&
+        event.key === "Escape"
+      ) {
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   10. HTML ESCAPE HELPER
+   ========================================================= */
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   11. CONTACT FORM
+   ========================================================= */
+
+function initContactForm() {
+
+  const form =
+    document.getElementById(
+      "contact-form"
+    );
+
+  if (!form) return;
+
+
+  form.addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+
+      const name =
+        document.getElementById(
+          "name"
+        )?.value.trim();
+
+
+      const email =
+        document.getElementById(
+          "email"
+        )?.value.trim();
+
+
+      const message =
+        document.getElementById(
+          "message"
+        )?.value.trim();
+
+
+      if (
+        !name ||
+        !email ||
+        !message
+      ) {
+
+        showFormMessage(
+          "Please fill in all fields."
+        );
+
+        return;
+
+      }
+
+
+      if (!isValidEmail(email)) {
+
+        showFormMessage(
+          "Please enter a valid email address."
+        );
+
+        return;
+
+      }
+
+
+      /*
+       * Since this is a static website,
+       * we create a mailto link instead
+       * of pretending the form has a backend.
+       */
+
+      const subject =
+        encodeURIComponent(
+          `Portfolio message from ${name}`
+        );
+
+
+      const body =
+        encodeURIComponent(
+          `Name: ${name}\n\nEmail: ${email}\n\nMessage:\n${message}`
+        );
+
+
+      const mailto =
+        `mailto:mhmuhib143@gmail.com?subject=${subject}&body=${body}`;
+
+
+      window.location.href =
+        mailto;
+
+
+      showFormMessage(
+        "Opening your email application..."
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   12. EMAIL VALIDATION
+   ========================================================= */
+
+function isValidEmail(email) {
+
+  const pattern =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  return pattern.test(email);
+
+}
+
+
+/* =========================================================
+   13. FORM MESSAGE
+   ========================================================= */
+
+function showFormMessage(message) {
+
+  const form =
+    document.getElementById(
+      "contact-form"
+    );
+
+  if (!form) return;
+
+
+  let messageElement =
+    document.getElementById(
+      "form-status"
+    );
+
+
+  if (!messageElement) {
+
+    messageElement =
+      document.createElement("p");
+
+    messageElement.id =
+      "form-status";
+
+    messageElement.className =
+      "form-note small";
+
+
+    form.appendChild(
+      messageElement
+    );
+
+  }
+
+
+  messageElement.textContent =
+    message;
+
+}
+
+
+/* =========================================================
+   14. SMOOTH ANCHOR NAVIGATION
+   ========================================================= */
+
+function initSmoothAnchors() {
+
+  const anchors =
+    document.querySelectorAll(
+      'a[href^="#"]'
+    );
+
+
+  anchors.forEach(anchor => {
+
+    anchor.addEventListener(
+      "click",
+      event => {
+
+        const href =
+          anchor.getAttribute(
+            "href"
+          );
+
+
+        if (
+          !href ||
+          href === "#"
+        ) {
+          return;
+        }
+
+
+        const target =
+          document.querySelector(
+            href
+          );
+
+
+        if (!target) {
+          return;
+        }
+
+
+        event.preventDefault();
+
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+    );
+
   });
 
-  // Contact form demo handler (prevent default & show minimal feedback)
-  const contactForm = doc.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = contactForm.querySelector('#name').value || 'there';
-      // minimal accessible feedback
-      alert(`Thanks ${name}! This demo form does not send messages. Please email me at mhmuhib143@gmail.com`);
-      contactForm.reset();
-    });
-  }
+}
 
-  // Ensure focus outline for keyboard users
-  (function focusOutline() {
-    let mouseDown = false;
-    document.addEventListener('mousedown', () => { mouseDown = true; document.documentElement.classList.add('using-mouse'); });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Tab') { mouseDown = false; document.documentElement.classList.remove('using-mouse'); }
-    });
-  })();
 
-  // Prefers-reduced-motion: disable animations where applicable
-  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (motionQuery && motionQuery.matches) {
-    // Remove transition styles by adding a class or settings if needed (left simple)
-    document.documentElement.classList.add('reduce-motion');
-  }
+/* =========================================================
+   15. IMAGE ERROR HANDLING
+   ========================================================= */
 
-})();
+function initImageFallbacks() {
+
+  const images =
+    document.querySelectorAll(
+      "img"
+    );
+
+
+  images.forEach(image => {
+
+    image.addEventListener(
+      "error",
+      () => {
+
+        image.classList.add(
+          "image-error"
+        );
+
+        console.warn(
+          `Image could not be loaded: ${image.src}`
+        );
+
+      }
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   16. INITIALIZE OPTIONAL FEATURES
+   ========================================================= */
+
+initSmoothAnchors();
+initImageFallbacks();
+
+
+/* =========================================================
+   END OF FILE
+   ========================================================= */
